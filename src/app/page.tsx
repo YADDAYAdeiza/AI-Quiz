@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import Link from "next/link";
 export default function Home() {
   return (
     <div className="flex flex-col flex-1">
@@ -8,22 +9,24 @@ export default function Home() {
           <div className="items-center flex flex-row ">
             <Image
               src={"/images/amr-mascot.png"}
-              width="400"
-              height="400"
+              width={400}
+              height={400}
               alt="AMR Mascot"
             />
           </div>
           <div className="text-center flex gap-4 flex-col">
-            <h1 className="text-3xl font-bold">Get quized about anything!</h1>
+            <h1 className="text-3xl font-bold">Get quizzed about anything!</h1>
             <h3 className="text-sm">
-              Upload documents, and easily generate your quizes with AI
+              Upload documents, and easily generate your quizzes with AI
             </h3>
-            <Button
-              variant={"neo"}
-              className="mt-4 h-14 text-white"
-            >
-              Get Started
-            </Button>
+            <Link href={"./dashboard"}>
+              <Button
+                variant={"neo"}
+                className="mt-4 h-14 text-white"
+              >
+                Get Started
+              </Button>
+            </Link>
           </div>
         </div>
       </main>
