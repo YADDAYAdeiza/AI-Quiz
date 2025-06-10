@@ -7,10 +7,14 @@ import {
   serial,
   boolean,
   pgEnum,
+  uuid,
+  varchar,
 } from "drizzle-orm/pg-core";
 
 import type { AdapterAccount } from "@auth/core/adapters";
 import { relations } from "drizzle-orm";
+
+//npx drizzle-kit push:pg
 
 export const users = pgTable("user", {
   id: text("id").notNull().primaryKey(),
@@ -129,3 +133,15 @@ export const quizSubmissionsRelations = relations(
     }),
   })
 );
+
+export const schools = pgTable("schools", {
+  id: serial("id").primaryKey(),
+  userId: varchar("userId", { length: 255 }).notNull(),
+  name: varchar("name", { length: 255 }).notNull(),
+  logoUrl: text("logoUrl").notNull(),
+  slideImage1Url: text("slideImage1Url").notNull(),
+  slideImage2Url: text("slideImage2Url").notNull(),
+  slideImage3Url: text("slideImage3Url").notNull(),
+  approved: boolean("approved").default(false),
+  score: integer("score").default(0).notNull(), // ✅ Required for leaderboard logic
+});

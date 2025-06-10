@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import SchoolProfileDisplay from "@/components/SchoolProfileDisplay";
 import Image from "next/image";
 import Link from "next/link";
 export default function Home() {
@@ -27,6 +28,7 @@ export default function Home() {
                 Get Started
               </Button>
             </Link>
+            <SchoolProfileDisplay />
           </div>
         </div>
       </main>
