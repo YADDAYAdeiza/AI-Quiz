@@ -12,15 +12,19 @@ interface SaveQuizData extends Quiz {
   questions: Array<Question & { answers?: Answer[] }>;
 }
 
-export default async function saveQuiz(quizData: SaveQuizData) {
+// 👇 Add this return type annotation
+export default async function saveQuiz(quizData: SaveQuizData): Promise<{ quizId: number }> {
   const session = await auth();
 
   if (!session?.user?.id) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    // ❌ This line causes type conflict
+    // return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
+    // ✅ FIX: Throw an error instead, so the caller handles it
+    throw new Error("Unauthorized");
   }
 
   const userId = session.user.id;
-
   const { name, description, questions } = quizData;
 
   const newQuiz = await db
@@ -31,6 +35,7 @@ export default async function saveQuiz(quizData: SaveQuizData) {
       userId,
     })
     .returning({ insertedId: quizes.id });
+
   const quizId = newQuiz[0].insertedId;
 
   await db.transaction(async (tx) => {
@@ -54,5 +59,6 @@ export default async function saveQuiz(quizData: SaveQuizData) {
       }
     }
   });
-  return { quizId };
+
+  return { quizId }; // ✅ Now TypeScript knows this is { quizId: number }
 }
