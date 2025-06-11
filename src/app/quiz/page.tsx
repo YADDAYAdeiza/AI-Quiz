@@ -8,7 +8,6 @@ import { Icon } from "@radix-ui/react-select";
 import ResultCard from "./ResultCard";
 import QuizSubmission from "./QuizSubmission";
 import ProgressBar from "@/components/progressBar";
-// import ProgressBar from "@/components/progressBar";
 
 const questions = [
   {

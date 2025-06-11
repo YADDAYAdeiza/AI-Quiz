@@ -100,6 +100,8 @@ export async function POST(req: NextRequest) {
 
     console.log("This is result: ", result);
 
+    console.log("A separator....");
+
     const { quizId } = await saveQuiz(result.quiz);
 
     return NextResponse.json({ quizId }, { status: 200 });

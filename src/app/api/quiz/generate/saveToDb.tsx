@@ -1,6 +1,8 @@
 import { db } from "@/db";
 import { quizes, questions as dbQuestions, questionAnswers } from "@/db/schema";
+import { auth } from "@/auth"; //my introduction
 import { InferInsertModel } from "drizzle-orm";
+import { NextResponse } from "next/server";
 
 type Quiz = InferInsertModel<typeof quizes>;
 type Question = InferInsertModel<typeof dbQuestions>;
@@ -11,6 +13,14 @@ interface SaveQuizData extends Quiz {
 }
 
 export default async function saveQuiz(quizData: SaveQuizData) {
+  const session = await auth();
+
+  if (!session?.user?.id) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  const userId = session.user.id;
+
   const { name, description, questions } = quizData;
 
   const newQuiz = await db
@@ -18,6 +28,7 @@ export default async function saveQuiz(quizData: SaveQuizData) {
     .values({
       name,
       description,
+      userId,
     })
     .returning({ insertedId: quizes.id });
   const quizId = newQuiz[0].insertedId;

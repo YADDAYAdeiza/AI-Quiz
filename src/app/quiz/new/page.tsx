@@ -27,6 +27,7 @@ const page = async (props: Props) => {
     <div className="flex flex-col flex-1">
       <main className="py-11 flex flex-col text-center gap-4 items-center flex-1 mt-24">
         {/* {!subscribed ? ( */}
+
         {subscribed ? (
           <>
             <h2 className="text-3xl font-bold mb-4">
@@ -37,6 +38,13 @@ const page = async (props: Props) => {
         ) : (
           <UpgradePlan />
         )}
+
+        {/* <>
+          <h2 className="text-3xl font-bold mb-4">
+            What do you want to be quizzed on Today?
+          </h2>
+          <UploadDoc />
+        </> */}
       </main>
     </div>
   );
