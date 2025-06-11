@@ -15,10 +15,17 @@ export async function POST(req: Request) {
   const userId = session.user.id;
   const data = await req.json();
 
-  const { name, logoUrl, advertImageUrl } = data;
+  const { name, logoUrl, slideImage1Url, slideImage2Url, slideImage3Url } =
+    data;
 
   // Simple validation
-  if (!name || !logoUrl || !advertImageUrl) {
+  if (
+    !name ||
+    !logoUrl ||
+    !slideImage1Url ||
+    !slideImage2Url ||
+    !slideImage3Url
+  ) {
     return new Response("Missing required fields", { status: 400 });
   }
 
@@ -34,7 +41,7 @@ export async function POST(req: Request) {
       .set({
         name,
         logoUrl,
-        advertImageUrl,
+        slideImage1Url, slideImage2Url, slideImage3Url,
         approved: false, // Re-approval required on update
       })
       .where(eq(schools.userId, userId));
@@ -44,7 +51,7 @@ export async function POST(req: Request) {
       userId,
       name,
       logoUrl,
-      advertImageUrl,
+      slideImage1Url, slideImage2Url, slideImage3Url,
       approved: false,
     });
   }
