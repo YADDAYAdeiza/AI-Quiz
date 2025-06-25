@@ -16,6 +16,7 @@ export const {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
   ],
+  secret: process.env.AUTH_SECRET,
   callbacks: {
     async session({ session, user }: { session: Session; user?: User }) {
       if (user && session?.user) {
