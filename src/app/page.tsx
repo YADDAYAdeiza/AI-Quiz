@@ -16,7 +16,9 @@ export default function Home() {
             />
           </div>
           <div className="text-center flex gap-4 flex-col">
-            <h1 className="text-3xl font-bold">Get quizzed about anything!</h1>
+            <h1 className="text-3xl font-bold">
+              Get quizzed about anything... now!
+            </h1>
             <h3 className="text-sm">
               Upload documents, and easily generate your quizzes with AI
             </h3>
