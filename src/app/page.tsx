@@ -2,6 +2,8 @@ import { Button } from "@/components/ui/button";
 import SchoolProfileDisplay from "@/components/SchoolProfileDisplay";
 import Image from "next/image";
 import Link from "next/link";
+import HighestScoringSchoolDisplay from "@/components/HighestScoringSchoolDisplay";
+
 export default function Home() {
   return (
     <div className="flex flex-col flex-1">
@@ -31,6 +33,12 @@ export default function Home() {
               </Button>
             </Link>
             <SchoolProfileDisplay />
+            <div>
+              <span>Highest School</span>
+              <div>
+                <HighestScoringSchoolDisplay />
+              </div>
+            </div>
           </div>
         </div>
       </main>
